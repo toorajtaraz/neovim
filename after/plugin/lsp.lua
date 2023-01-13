@@ -36,3 +36,5 @@ lsp.on_attach(function (client, bufnr)
 	vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
 end)
 lsp.setup()
+
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
