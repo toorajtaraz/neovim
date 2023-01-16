@@ -7,7 +7,8 @@ lsp.ensure_installed({
     'sumneko_lua',
     'clangd',
     'cmake',
-    'texlab'
+    'texlab',
+    'gopls'
 })
 lsp.configure('rust_analyzer', {
     on_attach = lsp.on_attach,
