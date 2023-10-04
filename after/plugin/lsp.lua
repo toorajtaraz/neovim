@@ -4,7 +4,6 @@ lsp.preset('recommended')
 lsp.ensure_installed({
     'rust_analyzer',
     'jedi_language_server',
-    'sumneko_lua',
     'clangd',
     'cmake',
     'texlab',
