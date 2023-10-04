@@ -1,14 +1,24 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
-lsp.ensure_installed({
-    'rust_analyzer',
-    'jedi_language_server',
-    'clangd',
-    'cmake',
-    'texlab',
-    'gopls'
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {
+        'rust_analyzer',
+        'jedi_language_server',
+        'clangd',
+        'cmake',
+        'texlab',
+    },
+  handlers = {
+    lsp.default_setup,
+    lua_ls = function()
+      local lua_opts = lsp.nvim_lua_ls()
+      require('lspconfig').lua_ls.setup(lua_opts)
+    end,
+  }
 })
+
 lsp.configure('rust_analyzer', {
     on_attach = lsp.on_attach,
     settings = {
@@ -48,6 +58,14 @@ local luasnip = require("luasnip")
 local cmp = require('cmp')
 
 cmp.setup({
+  sources = {
+    {name = 'path'},
+    {name = 'nvim_lsp'},
+    {name = 'nvim_lua'},
+    {name = 'buffer' },
+    {name = 'luasnip' },
+  },
+  formatting = lsp.cmp_format(),
   mapping = cmp.mapping.preset.insert({
     ['<CR>'] = cmp.mapping.confirm({select = false}),
     ["<Tab>"] = cmp.mapping(function(fallback)
