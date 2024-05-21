@@ -8,7 +8,6 @@ require('mason-lspconfig').setup({
         'jedi_language_server',
         'clangd',
         'cmake',
-        'texlab',
     },
   handlers = {
     lsp.default_setup,
